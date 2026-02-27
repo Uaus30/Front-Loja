@@ -15,16 +15,16 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col font-body">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass-panel border-b border-orange-100/50">
+      <header className="sticky top-0 z-50 bg-primary border-b border-white/10 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-24">
             
             {/* Logo area with hover effects */}
             <Link href="/" className="flex flex-col group cursor-pointer">
-              <span className="font-display font-black text-4xl text-primary leading-none group-hover:scale-105 transition-transform duration-300 origin-left">
+              <span className="font-display font-black text-4xl text-white leading-none group-hover:scale-110 transition-transform duration-300 origin-left">
                 Uaus!
               </span>
-              <span className="font-display font-bold text-sm tracking-[0.2em] text-foreground/80 group-hover:text-primary group-hover:scale-105 transition-all duration-300 origin-left">
+              <span className="font-display font-bold text-sm tracking-[0.2em] text-white/90 group-hover:scale-110 transition-all duration-300 origin-left">
                 MÁXIMO 30
               </span>
             </Link>
@@ -35,10 +35,10 @@ export function Layout({ children }: { children: ReactNode }) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-semibold text-sm uppercase tracking-wider transition-colors duration-200 ${
+                  className={`font-display font-bold text-sm uppercase tracking-wider transition-all duration-200 hover:scale-105 ${
                     location === link.href
-                      ? "text-primary border-b-2 border-primary py-1"
-                      : "text-muted-foreground hover:text-primary py-1"
+                      ? "text-white border-b-2 border-white py-1"
+                      : "text-white/80 hover:text-white py-1"
                   }`}
                 >
                   {link.label}
@@ -48,7 +48,7 @@ export function Layout({ children }: { children: ReactNode }) {
 
             {/* Mobile menu button (visual only for this demo) */}
             <div className="md:hidden">
-              <button className="p-2 text-primary">
+              <button className="p-2 text-white">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>

@@ -1,9 +1,45 @@
 import { motion } from "framer-motion";
 import { CalendarDays, MapPin, ArrowRight, Store, ShoppingBag, Star } from "lucide-react";
 import { Link } from "wouter";
+import { useState, useEffect } from "react";
 // Static imports for images
 import facadeRight from '@assets/FACHADA_LADODIREITO_1772216408089.png';
 import facadeLeft from '@assets/FACHADA_LADOESQUERDO_1772216408090.png';
+
+function Countdown() {
+  const targetDate = new Date("2026-03-07T09:00:00").getTime();
+  const [timeLeft, setTimeLeft] = useState(targetDate - Date.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(targetDate - Date.now());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  if (timeLeft <= 0) return null;
+
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+  return (
+    <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto mt-8">
+      {[
+        { label: "Dias", value: days },
+        { label: "Horas", value: hours },
+        { label: "Min", value: minutes },
+        { label: "Seg", value: seconds },
+      ].map((item) => (
+        <div key={item.label} className="bg-white/20 backdrop-blur-md rounded-xl p-3 border border-white/30">
+          <div className="text-2xl md:text-3xl font-black">{item.value}</div>
+          <div className="text-[10px] uppercase tracking-widest font-bold opacity-80">{item.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -60,6 +96,7 @@ export default function Home() {
             <div className="space-y-4 text-center md:text-left">
               <h2 className="text-3xl md:text-5xl font-display font-bold">Grande Inauguração!</h2>
               <p className="text-white/90 text-lg">Venha comemorar conosco e aproveitar as melhores ofertas.</p>
+              <Countdown />
             </div>
             
             <div className="flex flex-col gap-4 bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/20">

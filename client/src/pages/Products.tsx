@@ -8,22 +8,22 @@ export default function Products() {
 
   return (
     <div className="min-h-screen bg-orange-50/30 pt-16 pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="text-center mb-16">
-          <motion.div
+      <div className="bg-primary pt-20 pb-16 mb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-6xl font-display font-black text-white mb-6"
           >
-            <h1 className="text-4xl md:text-5xl font-display font-black text-foreground mb-4">
-              Nossos <span className="text-primary">Produtos</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Descubra nossas novidades e super ofertas. Lembre-se: Nada passa de R$ 30,00!
-            </p>
-          </motion.div>
+            Nossos <span className="text-white/90">Produtos</span>
+          </motion.h1>
+          <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
+            Descubra nossas novidades e super ofertas. Lembre-se: Nada passa de R$ 30,00!
+          </p>
         </div>
-
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />

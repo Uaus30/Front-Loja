@@ -29,22 +29,22 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-white pt-16 pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="text-center mb-16">
-          <motion.div
+      <div className="bg-primary pt-20 pb-16 mb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-6xl font-display font-black text-white mb-6"
           >
-            <h1 className="text-4xl md:text-5xl font-display font-black text-foreground mb-4">
-              Fale <span className="text-primary">Conosco</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Dúvidas, sugestões ou elogios? Queremos ouvir você. Preencha o formulário ou entre em contato pelos nossos canais.
-            </p>
-          </motion.div>
+            Fale <span className="text-white/90">Conosco</span>
+          </motion.h1>
+          <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
+            Dúvidas, sugestões ou elogios? Queremos ouvir você. Preencha o formulário ou entre em contato pelos nossos canais.
+          </p>
         </div>
-
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           
           {/* Form Side */}
