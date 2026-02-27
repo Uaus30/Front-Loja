@@ -24,7 +24,7 @@ export function Layout({ children }: { children: ReactNode }) {
               <span className="font-display font-black text-4xl text-white leading-none group-hover:scale-110 transition-transform duration-300 origin-left">
                 Uaus!
               </span>
-              <span className="font-display font-bold text-sm tracking-[0.2em] text-white/90 group-hover:scale-110 transition-all duration-300 origin-left">
+              <span className="font-display font-bold text-sm tracking-[0.2em] text-white/90 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 origin-left">
                 MÁXIMO 30
               </span>
             </Link>
