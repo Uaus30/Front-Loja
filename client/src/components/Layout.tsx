@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
 import { motion } from "framer-motion";
+import logoIcon from "@assets/icone_sem_fundo_1772322579980.png";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
@@ -20,13 +21,23 @@ export function Layout({ children }: { children: ReactNode }) {
           <div className="flex justify-between items-center h-24">
             
             {/* Logo area with hover effects */}
-            <Link href="/" className="flex flex-col group cursor-pointer">
-              <span className="font-display font-black text-4xl text-white leading-none group-hover:scale-110 transition-transform duration-300 origin-left">
-                Uaus!
-              </span>
-              <span className="font-display font-bold text-sm tracking-[0.2em] text-white/90 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 origin-left">
-                MÁXIMO 30
-              </span>
+            <Link href="/" className="flex items-center gap-4 group cursor-pointer">
+              <div className="relative">
+                <div className="absolute -inset-2 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <img 
+                  src={logoIcon} 
+                  alt="Uaus! Logo" 
+                  className="w-16 h-16 object-contain relative z-10 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display font-black text-4xl text-white leading-none group-hover:scale-105 transition-transform duration-300 origin-left">
+                  Uaus!
+                </span>
+                <span className="font-display font-bold text-sm tracking-[0.2em] text-white/90 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 origin-left">
+                  MÁXIMO 30
+                </span>
+              </div>
             </Link>
 
             {/* Navigation */}
