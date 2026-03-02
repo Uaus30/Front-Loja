@@ -1,8 +1,3 @@
-import { motion } from "framer-motion";
-import { Tag, Loader2, ImageOff } from "lucide-react";
-import { useProducts } from "@/hooks/use-products";
-import type { ProductResponse } from "@shared/routes";
-
 import { motion, AnimatePresence } from "framer-motion";
 import { Tag, Loader2, ImageOff, ShoppingBag, X } from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
@@ -157,6 +152,3 @@ function ProductCard({
     </motion.div>
   );
 }
-
-// Additional lucide-react import fix for this file context
-import { ShoppingBag } from "lucide-react";
