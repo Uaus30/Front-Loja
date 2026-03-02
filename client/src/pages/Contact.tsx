@@ -178,9 +178,9 @@ export default function Contact() {
                 href="https://wa.me/5544991365567" 
                 target="_blank" 
                 rel="noreferrer"
-                className="block w-full py-4 px-6 rounded-xl font-bold text-center text-green-700 bg-green-50 border-2 border-green-200 hover:bg-green-500 hover:text-white hover:border-green-500 hover:-translate-y-1 transition-all duration-300 shadow-sm"
+                className="block w-full py-5 px-6 rounded-2xl font-display font-black text-center text-white bg-green-600 shadow-xl shadow-green-600/30 hover:bg-green-500 hover:-translate-y-1 transition-all duration-300 animate-[pulse_2s_infinite]"
               >
-                Chamar no WhatsApp
+                CHAMAR NO WHATSAPP
               </a>
             </div>
           </motion.div>

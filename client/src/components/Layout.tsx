@@ -1,11 +1,12 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
-import { motion } from "framer-motion";
+import { MapPin, Phone, Mail, Instagram, MessageCircle, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import logoIcon from "@assets/icone_sem_fundo_1772322579980.png";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Início" },
@@ -23,11 +24,11 @@ export function Layout({ children }: { children: ReactNode }) {
             {/* Logo area with hover effects */}
             <Link href="/" className="flex items-center gap-4 group cursor-pointer">
               <div className="relative">
-                <div className="absolute -inset-2 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute -inset-4 bg-white/40 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <img 
                   src={logoIcon} 
                   alt="Uaus! Logo" 
-                  className="w-16 h-16 object-contain relative z-10 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] group-hover:scale-110 transition-transform duration-300"
+                  className="w-20 h-20 object-contain relative z-10 drop-shadow-[0_0_12px_rgba(255,255,255,0.7)] group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <div className="flex flex-col">
@@ -57,16 +58,46 @@ export function Layout({ children }: { children: ReactNode }) {
               ))}
             </nav>
 
-            {/* Mobile menu button (visual only for this demo) */}
+            {/* Mobile menu button */}
             <div className="md:hidden">
-              <button className="p-2 text-white">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+              >
+                {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
               </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-primary border-t border-white/10 overflow-hidden"
+            >
+              <nav className="flex flex-col p-4 gap-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`font-display font-bold text-lg uppercase tracking-wider py-2 px-4 rounded-lg transition-colors ${
+                      location === link.href
+                        ? "bg-white text-primary"
+                        : "text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Main Content */}
@@ -81,23 +112,36 @@ export function Layout({ children }: { children: ReactNode }) {
             
             {/* Brand Col */}
             <div className="space-y-4">
-              <div className="flex flex-col">
-                <span className="font-display font-black text-4xl text-primary leading-none">
-                  Uaus!
-                </span>
-                <span className="font-display font-bold text-sm tracking-[0.2em] text-white/80">
-                  MÁXIMO 30
-                </span>
+              <div className="flex items-center gap-3">
+                <img src={logoIcon} alt="Uaus! Logo" className="w-12 h-12 object-contain brightness-0 invert" />
+                <div className="flex flex-col">
+                  <span className="font-display font-black text-3xl text-primary leading-none">
+                    Uaus!
+                  </span>
+                  <span className="font-display font-bold text-xs tracking-[0.2em] text-white/80 uppercase">
+                    MÁXIMO 30
+                  </span>
+                </div>
               </div>
               <p className="text-white/60 text-sm leading-relaxed">
                 Tudo o que você precisa por no máximo R$ 30,00. Qualidade e preço baixo em um só lugar.
               </p>
               <div className="flex gap-4 pt-2">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                <a 
+                  href="https://www.instagram.com/uaus_oficial/" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+                >
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
-                  <Facebook className="w-5 h-5" />
+                <a 
+                  href="https://wa.me/5544991365567" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" />
                 </a>
               </div>
             </div>
@@ -116,7 +160,14 @@ export function Layout({ children }: { children: ReactNode }) {
                 </li>
                 <li className="flex items-start gap-3 text-white/70">
                   <MapPin className="w-5 h-5 shrink-0 mt-0.5" />
-                  <span>Rua Paranaguá, 663, centro,<br />Tapira-PR</span>
+                  <a 
+                    href="https://share.google/ryVm9lKIGuVFk0sN2" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Rua Paranaguá, 663, centro,<br />Tapira-PR
+                  </a>
                 </li>
               </ul>
             </div>

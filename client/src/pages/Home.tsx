@@ -32,9 +32,9 @@ function Countdown() {
         { label: "Min", value: minutes },
         { label: "Seg", value: seconds },
       ].map((item) => (
-        <div key={item.label} className="bg-white/20 backdrop-blur-md rounded-xl p-3 border border-white/30">
-          <div className="text-2xl md:text-3xl font-black">{item.value}</div>
-          <div className="text-[10px] uppercase tracking-widest font-bold opacity-80">{item.label}</div>
+        <div key={item.label} className="bg-white/20 backdrop-blur-md rounded-xl p-3 border border-white/30 flex flex-col items-center justify-center">
+          <div className="text-2xl md:text-3xl font-black leading-none">{item.value}</div>
+          <div className="text-[10px] uppercase tracking-widest font-bold opacity-80 mt-1">{item.label}</div>
         </div>
       ))}
     </div>
@@ -42,6 +42,22 @@ function Countdown() {
 }
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const storePhotos = [
+    facadeLeft,
+    facadeRight,
+    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1534452203293-497d1f97e0f0?q=80&w=800&auto=format&fit=crop"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % storePhotos.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [storePhotos.length]);
+
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -62,8 +78,11 @@ export default function Home() {
                 <span>Nova loja em Tapira-PR</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-display font-black text-foreground leading-[1.1] mb-6">
-                A revolução do preço chegou. <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">Tudo por Máximo 30!</span>
+                A revolução do preço chegou. <br className="hidden md:block" />
+                <div className="h-4 md:h-8" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 italic">
+                  Tudo por no máximo 30 reais!
+                </span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-10 text-balance mx-auto">
                 A Uaus! traz para você um conceito inovador: qualidade, variedade e preço fixo. 
@@ -99,7 +118,7 @@ export default function Home() {
               <Countdown />
             </div>
             
-            <div className="flex flex-col gap-4 bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/20">
+            <div className="flex flex-col gap-4 bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/20 min-w-[280px]">
               <div className="flex items-center gap-4">
                 <div className="bg-white text-primary p-3 rounded-xl">
                   <CalendarDays className="w-8 h-8" />
@@ -107,7 +126,7 @@ export default function Home() {
                 <div className="text-left">
                   <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Data</p>
                   <p className="text-xl font-bold">7 de Março de 2026</p>
-                  <p className="text-white/90 text-sm">Sábado Especial</p>
+                  <p className="text-white/90 text-sm font-medium">Sábado</p>
                 </div>
               </div>
               <div className="w-full h-px bg-white/20" />
@@ -118,7 +137,7 @@ export default function Home() {
                 <div className="text-left">
                   <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Local</p>
                   <p className="text-lg font-bold">Rua Paranaguá, 663</p>
-                  <p className="text-white/90 text-sm">Centro, Tapira-PR</p>
+                  <p className="text-white/90 text-sm font-medium">Centro, Tapira-PR</p>
                 </div>
               </div>
             </div>
@@ -126,7 +145,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Store Photos */}
+      {/* Store Photos Carousel */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -136,38 +155,50 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div 
-              whileHover={{ y: -8 }}
-              className="rounded-3xl overflow-hidden shadow-xl border border-border group"
-            >
-              <div className="relative overflow-hidden aspect-[4/3]">
-                <img 
-                  src={facadeLeft} 
-                  alt="Fachada Lado Esquerdo Uaus!" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <div className="relative group max-w-4xl mx-auto px-4">
+            <div className="aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border border-border bg-gray-100 relative">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentSlide}
+                  src={storePhotos[currentSlide]}
+                  alt={`Loja Uaus! - Foto ${currentSlide + 1}`}
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.7 }}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                  <h3 className="text-white text-2xl font-bold font-display">Vista Esquerda</h3>
-                </div>
+              </AnimatePresence>
+              
+              {/* Carousel Controls Overlay */}
+              <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button 
+                  onClick={() => setCurrentSlide((prev) => (prev - 1 + storePhotos.length) % storePhotos.length)}
+                  className="bg-white/90 hover:bg-primary hover:text-white p-3 rounded-full shadow-lg transition-all backdrop-blur-sm z-20"
+                >
+                  <ArrowRight className="w-6 h-6 rotate-180" />
+                </button>
+                <button 
+                  onClick={() => setCurrentSlide((prev) => (prev + 1) % storePhotos.length)}
+                  className="bg-white/90 hover:bg-primary hover:text-white p-3 rounded-full shadow-lg transition-all backdrop-blur-sm z-20"
+                >
+                  <ArrowRight className="w-6 h-6" />
+                </button>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              whileHover={{ y: -8 }}
-              className="rounded-3xl overflow-hidden shadow-xl border border-border group"
-            >
-              <div className="relative overflow-hidden aspect-[4/3]">
-                <img 
-                  src={facadeRight} 
-                  alt="Fachada Lado Direito Uaus!" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            {/* Carousel Indicators */}
+            <div className="flex justify-center gap-2 mt-6">
+              {storePhotos.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentSlide(idx)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    currentSlide === idx ? "bg-primary w-8" : "bg-orange-200"
+                  }`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                  <h3 className="text-white text-2xl font-bold font-display">Vista Direita</h3>
-                </div>
-              </div>
-            </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -175,23 +206,28 @@ export default function Home() {
       {/* Features Grid */}
       <section className="py-24 bg-orange-50/50 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-border text-center hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-orange-100 text-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            <div className="bg-white p-8 rounded-3xl shadow-sm border border-border text-center hover:shadow-md transition-all flex flex-col items-center">
+              <div className="w-16 h-16 bg-orange-100 text-primary rounded-2xl flex items-center justify-center mb-6">
                 <ShoppingBag className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold font-display mb-3">Variedade incrível</h3>
               <p className="text-muted-foreground">Milhares de itens para sua casa, presentes e dia a dia.</p>
             </div>
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-border text-center hover:shadow-md transition-shadow transform md:-translate-y-4 border-primary/20">
-              <div className="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/30">
-                <Star className="w-8 h-8" />
+            
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="bg-primary p-8 rounded-3xl shadow-xl shadow-primary/20 border-2 border-white/20 text-center flex flex-col items-center transform md:-translate-y-8 z-10"
+            >
+              <div className="w-20 h-20 bg-white text-primary rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                <Star className="w-10 h-10" />
               </div>
-              <h3 className="text-xl font-bold font-display mb-3 text-primary">Preço Único MÁXIMO</h3>
-              <p className="text-muted-foreground">Nenhum produto custa mais que R$ 30,00. Nossa promessa.</p>
-            </div>
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-border text-center hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-orange-100 text-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <h3 className="text-2xl font-bold font-display mb-3 text-white">Preço Único MÁXIMO</h3>
+              <p className="text-white/90 font-medium">Nenhum produto custa mais que R$ 30,00 reais! Nossa promessa inabalável para você e sua família.</p>
+            </motion.div>
+
+            <div className="bg-white p-8 rounded-3xl shadow-sm border border-border text-center hover:shadow-md transition-all flex flex-col items-center">
+              <div className="w-16 h-16 bg-orange-100 text-primary rounded-2xl flex items-center justify-center mb-6">
                 <Store className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold font-display mb-3">Ambiente Familiar</h3>
@@ -200,6 +236,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
     </div>
   );
 }
