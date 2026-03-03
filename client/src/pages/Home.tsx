@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CalendarDays, MapPin, ArrowRight, Store, ShoppingBag, Star } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
