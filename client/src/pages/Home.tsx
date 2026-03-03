@@ -80,7 +80,7 @@ export default function Home() {
               <h1 className="text-5xl md:text-7xl font-display font-black text-foreground leading-[1.1] mb-6">
                 A revolução do preço chegou. <br className="hidden md:block" />
                 <div className="h-4 md:h-8" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400 italic">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
                   Tudo por no máximo 30 reais!
                 </span>
               </h1>
@@ -155,17 +155,17 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative group max-w-4xl mx-auto px-4">
+          <div className="relative group max-w-4xl mx-auto px-4 overflow-hidden">
             <div className="aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border border-border bg-gray-100 relative">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentSlide}
                   src={storePhotos[currentSlide]}
                   alt={`Loja Uaus! - Foto ${currentSlide + 1}`}
-                  initial={{ opacity: 0, scale: 1.1 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.7 }}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
                   className="w-full h-full object-cover"
                 />
               </AnimatePresence>
@@ -215,9 +215,8 @@ export default function Home() {
               <p className="text-muted-foreground">Milhares de itens para sua casa, presentes e dia a dia.</p>
             </div>
             
-            <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="bg-primary p-8 rounded-3xl shadow-xl shadow-primary/20 border-2 border-white/20 text-center flex flex-col items-center transform md:-translate-y-8 z-10"
+            <div 
+              className="bg-primary p-8 rounded-3xl shadow-xl shadow-primary/20 border-2 border-white/20 text-center flex flex-col items-center z-10"
             >
               <div className="w-20 h-20 bg-white text-primary rounded-3xl flex items-center justify-center mb-6 shadow-lg">
                 <Star className="w-10 h-10" />
