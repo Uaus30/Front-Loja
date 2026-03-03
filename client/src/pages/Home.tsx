@@ -223,7 +223,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold font-display mb-3 text-white">Preço Único MÁXIMO</h3>
               <p className="text-white/90 font-medium">Nenhum produto custa mais que R$ 30,00 reais! Nossa promessa inabalável para você e sua família.</p>
-            </motion.div>
+            </div>
 
             <div className="bg-white p-8 rounded-3xl shadow-sm border border-border text-center hover:shadow-md transition-all flex flex-col items-center">
               <div className="w-16 h-16 bg-orange-100 text-primary rounded-2xl flex items-center justify-center mb-6">
