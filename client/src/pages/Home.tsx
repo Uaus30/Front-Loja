@@ -82,14 +82,14 @@ export default function Home() {
                 <span>Nova loja em Tapira-PR</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-display font-black text-foreground leading-[1.1] mb-6">
-                Chegou agora em Tapira... <br className="hidden md:block" />
+                Chegou em Tapira... <br className="hidden md:block" />
                 <div className="h-4 md:h-8" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
-                  Tudo por no máximo 30 reais!
+                  Uma loja com tudo por no máximo 30 reais!
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-10 text-balance mx-auto">
-                A loja Uaus traz pra você um conceito inovador: qualidade, variedade e preço baixo de verdade. 
+                A Uaus fica na rua da prefeitura, pertinho do Correio e traz até você um conceito inovador: qualidade, variedade e preço baixo de verdade. 
                 Nenhum produto em nossa loja custa mais que 30 reais... Surpreenda-se!
               </p>
               
