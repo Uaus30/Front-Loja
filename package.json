@@ -4,9 +4,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development tsx server/index.ts",
+    "dev": "node -e \"process.env.NODE_ENV='development'; require('child_process').spawn('tsx',['server/index.ts'],{stdio:'inherit',shell:true,env:process.env})\"",
     "build": "tsx script/build.ts",
-    "start": "NODE_ENV=production node dist/index.cjs",
+    "start": "node -e \"process.env.NODE_ENV='production'; require('child_process').spawn('node',['dist/index.cjs'],{stdio:'inherit',shell:true,env:process.env})\"",
     "check": "tsc",
     "db:push": "drizzle-kit push"
   },
