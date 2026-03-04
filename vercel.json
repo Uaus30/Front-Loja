@@ -5,7 +5,8 @@
   "functions": {
     "api/[...path].ts": {
       "runtime": "@vercel/node@4.0.0",
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "server/**"
     }
   },
   "routes": [
