@@ -1,6 +1,6 @@
-import type { RequestHandler } from "express";
+import type { Request, Response } from "express";
+import handler from "./[...path]";
 
-// @ts-expect-error Built server entry is generated at deploy time and has no type declarations.
-import server from "../dist/index.cjs";
-
-export default server as RequestHandler;
+export default async function indexHandler(req: Request, res: Response) {
+  return handler(req, res);
+}
