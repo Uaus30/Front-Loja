@@ -113,7 +113,7 @@ export function Layout({ children }: { children: ReactNode }) {
             {/* Brand Col */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <img src={logoIcon} alt="Uaus! Logo" className="w-12 h-12 object-contain brightness-0 invert" />
+                <img src={logoIcon} alt="Uaus! Logo" className="w-12 h-12 object-contain brightness-100" />
                 <div className="flex flex-col">
                   <span className="font-display font-black text-3xl text-primary leading-none">
                     Uaus!

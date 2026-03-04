@@ -3,11 +3,25 @@ import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
+import nodemailer from "nodemailer";
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "uaus30@gmail.com",
+      pass: "xgjz eqso jxug sopk",
+    },
+    tls: {
+      ciphers: 'SSLv3'
+    }
+  });
 
   app.get(api.products.list.path, async (req, res) => {
     try {
@@ -23,8 +37,29 @@ export async function registerRoutes(
       const input = api.contact.create.input.parse(req.body);
       const message = await storage.createContactMessage(input);
       
-      // Simulate email sending logic
-      console.log(`Simulating email to uaus30@gmail.com for message from ${input.email}`);
+      // Send real email
+      const mailOptions = {
+        from: `"Site Uaus!" <uaus30@gmail.com>`,
+        to: "uaus30@gmail.com",
+        subject: `Nova mensagem de contato: ${input.name}`,
+        text: `Nome: ${input.name}\nE-mail: ${input.email}\nTelefone: ${input.phone}\n\nMensagem:\n${input.message}`,
+        html: `
+          <h3>Nova mensagem de contato recebida pelo site</h3>
+          <p><strong>Nome:</strong> ${input.name}</p>
+          <p><strong>E-mail:</strong> ${input.email}</p>
+          <p><strong>Telefone:</strong> ${input.phone}</p>
+          <p><strong>Mensagem:</strong></p>
+          <p>${input.message.replace(/\n/g, '<br>')}</p>
+        `,
+      };
+
+      try {
+        await transporter.sendMail(mailOptions);
+        console.log(`Email sent successfully to uaus30@gmail.com`);
+      } catch (mailErr) {
+        console.error("Error sending email:", mailErr);
+        // We still return 201 because the message was saved in DB
+      }
       
       res.status(201).json(message);
     } catch (err) {
