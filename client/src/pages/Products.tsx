@@ -21,10 +21,10 @@ export default function Products() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-display font-black text-white mb-6"
           >
-            Nossos <span className="text-white/90 italic">Produtos</span>
+            Nossos Produtos
           </motion.h1>
           <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
-            Descubra nossas novidades e super ofertas. Lembre-se: Nada passa de R$ 30,00!
+            Descubra novidades e super ofertas exclusivas aqui pelo site!
           </p>
         </div>
       </div>
@@ -38,7 +38,7 @@ export default function Products() {
         ) : error ? (
           <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-red-100">
             <p className="text-red-500 font-bold mb-2">Ops! Ocorreu um erro ao carregar os produtos.</p>
-            <p className="text-muted-foreground">Tente recarregar a página.</p>
+            <p className="text-muted-foreground">Tente recarregar a página ou voltar mais tarde.</p>
           </div>
         ) : products && products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

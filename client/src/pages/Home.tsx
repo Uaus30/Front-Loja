@@ -82,15 +82,15 @@ export default function Home() {
                 <span>Nova loja em Tapira-PR</span>
               </div>
               <h1 className="text-5xl md:text-7xl font-display font-black text-foreground leading-[1.1] mb-6">
-                A revolução do preço chegou. <br className="hidden md:block" />
+                Chegou agora em Tapira... <br className="hidden md:block" />
                 <div className="h-4 md:h-8" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">
                   Tudo por no máximo 30 reais!
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-10 text-balance mx-auto">
-                A Uaus! traz para você um conceito inovador: qualidade, variedade e preço fixo. 
-                Nenhum produto em nossa loja custa mais que R$ 30,00. Surpreenda-se!
+                A loja Uaus traz pra você um conceito inovador: qualidade, variedade e preço baixo de verdade. 
+                Nenhum produto em nossa loja custa mais que 30 reais... Surpreenda-se!
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -117,8 +117,8 @@ export default function Home() {
             className="bg-gradient-to-r from-primary to-orange-600 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 border border-white/20"
           >
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-3xl md:text-5xl font-display font-bold">Grande Inauguração!</h2>
-              <p className="text-white/90 text-lg">Venha comemorar conosco e aproveitar as melhores ofertas.</p>
+              <h2 className="text-3xl md:text-5xl font-display font-bold">Inauguração neste Sábado!</h2>
+              <p className="text-white/90 text-lg">Venha comemorar conosco e aproveitar as melhores ofertas da região...</p>
               <Countdown />
             </div>
             
@@ -155,7 +155,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-display font-bold text-foreground mb-4">Conheça nossa loja</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Um ambiente preparado para receber você com conforto e muitas novidades.
+              Um ambiente preparado para receber você com bom atendimento e muitos produtos.
             </p>
           </div>
 
@@ -215,8 +215,8 @@ export default function Home() {
               <div className="w-16 h-16 bg-orange-100 text-primary rounded-2xl flex items-center justify-center mb-6">
                 <ShoppingBag className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold font-display mb-3">Variedade incrível</h3>
-              <p className="text-muted-foreground">Milhares de itens para sua casa, presentes e dia a dia.</p>
+              <h3 className="text-xl font-bold font-display mb-3">Presentes</h3>
+              <p className="text-muted-foreground">Brinquedos, utilidades de casa, livros e muito mais</p>
             </div>
             
             <div 
@@ -225,16 +225,16 @@ export default function Home() {
               <div className="w-20 h-20 bg-white text-primary rounded-3xl flex items-center justify-center mb-6 shadow-lg">
                 <Star className="w-10 h-10" />
               </div>
-              <h3 className="text-2xl font-bold font-display mb-3 text-white">Preço Único MÁXIMO</h3>
-              <p className="text-white/90 font-medium">Nenhum produto custa mais que R$ 30,00 reais! Nossa promessa inabalável para você e sua família.</p>
+              <h3 className="text-2xl font-bold font-display mb-3 text-white">MÁXIMO 30 REAIS</h3>
+              <p className="text-white/90 font-medium">Nenhum produto custa mais que R$ 30,00 reais! Se encontrar um produto caro, reclame ;D</p>
             </div>
 
             <div className="bg-white p-8 rounded-3xl shadow-sm border border-border text-center hover:shadow-md transition-all flex flex-col items-center">
               <div className="w-16 h-16 bg-orange-100 text-primary rounded-2xl flex items-center justify-center mb-6">
                 <Store className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold font-display mb-3">Ambiente Familiar</h3>
-              <p className="text-muted-foreground">Loja climatizada e atendimento especial para você e sua família.</p>
+              <h3 className="text-xl font-bold font-display mb-3">Diversidade</h3>
+              <p className="text-muted-foreground">Diversos outros produtos: Roupa íntima, toalhas, panos de prato, ferramentas, etc...</p>
             </div>
           </div>
         </div>

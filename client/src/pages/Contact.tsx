@@ -44,7 +44,7 @@ export default function Contact() {
             Fale <span className="text-white/90">Conosco</span>
           </motion.h1>
           <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
-            Dúvidas, sugestões ou elogios? Queremos ouvir você. Preencha o formulário ou entre em contato pelos nossos canais.
+            Dúvidas, sugestões ou elogios? Queremos ouvir você. Preencha o formulário ou entre em contato pelo nosso WhatsApp.
           </p>
         </div>
       </div>
@@ -183,7 +183,7 @@ export default function Contact() {
                 href="https://wa.me/5544991365567" 
                 target="_blank" 
                 rel="noreferrer"
-                className="block w-full py-5 px-6 rounded-2xl font-display font-black text-center text-white bg-green-600 shadow-xl hover:bg-green-500 hover:-translate-y-1 transition-all duration-300 animate-pulse-glow"
+                className="block w-full py-5 px-6 rounded-2xl font-display font-black text-center text-white bg-green-600 shadow-xl hover:bg-green-500 hover:-translate-y-1 transition-all duration-700 animate-pulse-glow"
               >
                 CHAMAR NO WHATSAPP
               </a>
