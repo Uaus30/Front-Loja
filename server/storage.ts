@@ -6,7 +6,7 @@ import {
   type ProductResponse,
   type InsertContactMessage,
   type ContactMessageResponse
-} from "@shared/schema";
+} from "../shared/schema";
 
 export interface IStorage {
   getProducts(): Promise<ProductResponse[]>;
