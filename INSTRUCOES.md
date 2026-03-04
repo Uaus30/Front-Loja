@@ -75,3 +75,7 @@ Este documento contém o passo a passo para configurar o projeto localmente, sub
 5. Clique em **"Deploy"**.
 
 **Nota:** Como este projeto utiliza uma API integrada (Express + Vite), a Vercel detectará automaticamente as configurações. Se houver necessidade de ajustes finos para rotas de API, o arquivo `vercel.json` pode ser necessário (já incluído no projeto se compatível).
+
+
+## Deploy atualizado
+- Consulte `DEPLOY_VERCEL.md` para o passo a passo completo de deploy no Vercel e configuração do domínio `uaus.com.br`.
