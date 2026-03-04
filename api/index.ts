@@ -1,5 +1,6 @@
-import type { RequestHandler } from "express";
+import type { Request, Response } from "express";
+import handler from "./[...path]";
 
-const server = require("../dist/index.cjs") as RequestHandler;
-
-export default server;
+export default async function indexHandler(req: Request, res: Response) {
+  return handler(req, res);
+}
