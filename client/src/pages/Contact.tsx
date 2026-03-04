@@ -11,7 +11,7 @@ export default function Contact() {
   const mutation = useContact();
 
   useEffect(() => {
-    document.title = "Uaus! | Contatos";
+    document.title = "Uaus | Contatos";
   }, []);
   
   const form = useForm<ContactMessageInput>({

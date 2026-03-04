@@ -9,7 +9,7 @@ export default function Products() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = "Uaus! | Produtos";
+    document.title = "Uaus | Produtos";
   }, []);
 
   return (
