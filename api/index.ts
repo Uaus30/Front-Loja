@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 
-const server = require("../dist/index.cjs") as RequestHandler;
+// @ts-expect-error Built server entry is generated at deploy time and has no type declarations.
+import server from "../dist/index.cjs";
 
-export default server;
+export default server as RequestHandler;
