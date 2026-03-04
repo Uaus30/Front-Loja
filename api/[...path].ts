@@ -1,6 +1,6 @@
 import express, { type NextFunction, type Request, type Response } from "express";
-import { loadEnv } from "../server/env.ts";
-import { registerRoutes } from "../server/routes.ts";
+import { loadEnv } from "../server/env";
+import { registerRoutes } from "../server/routes";
 
 loadEnv();
 
