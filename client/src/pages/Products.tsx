@@ -2,11 +2,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Tag, Loader2, ImageOff, ShoppingBag, X } from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
 import type { ProductResponse } from "@shared/routes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Products() {
   const { data: products, isLoading, error } = useProducts();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.title = "Uaus! | Produtos";
+  }, []);
 
   return (
     <div className="min-h-screen bg-orange-50/30 pt-16 pb-24">

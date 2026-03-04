@@ -5,9 +5,14 @@ import { insertContactMessageSchema } from "@shared/schema";
 import type { ContactMessageInput } from "@shared/routes";
 import { useContact } from "@/hooks/use-contact";
 import { MapPin, Phone, Mail, MessageSquare, Send } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Contact() {
   const mutation = useContact();
+
+  useEffect(() => {
+    document.title = "Uaus! | Contatos";
+  }, []);
   
   const form = useForm<ContactMessageInput>({
     resolver: zodResolver(insertContactMessageSchema),

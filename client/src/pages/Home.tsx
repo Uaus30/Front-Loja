@@ -52,6 +52,10 @@ export default function Home() {
   ];
 
   useEffect(() => {
+    document.title = "Uaus! Máximo 30";
+  }, []);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % storePhotos.length);
     }, 5000);
