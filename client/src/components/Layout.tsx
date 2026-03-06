@@ -128,7 +128,7 @@ export function Layout({ children }: { children: ReactNode }) {
               </p>
               <div className="flex gap-4 pt-2">
                 <a 
-                  href="https://www.instagram.com/uaus_oficial/" 
+                  href="https://www.instagram.com/uaus_maximo30/" 
                   target="_blank" 
                   rel="noreferrer"
                   className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
