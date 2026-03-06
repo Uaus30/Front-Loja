@@ -21,10 +21,10 @@ export default function Products() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-display font-black text-white mb-6"
           >
-            Nossos Produtos
+            Promoções e Novidades
           </motion.h1>
           <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
-            Descubra novidades e super ofertas exclusivas aqui pelo site!
+            Todas as imagens são meramente ilustrativas.
           </p>
         </div>
       </div>

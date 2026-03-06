@@ -3,8 +3,13 @@ import { CalendarDays, MapPin, ArrowRight, Store, ShoppingBag, Star } from "luci
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 // Static imports for images
-import facadeRight from '@assets/FACHADA_LADODIREITO_1772216408089.png';
-import facadeLeft from '@assets/FACHADA_LADOESQUERDO_1772216408090.png';
+import img01 from '@assets/01_frente_loja.jpeg';
+import img02 from '@assets/02_cozinha.jpeg';
+import img03 from '@assets/03_potes.jpeg';
+import img04 from '@assets/04_ferramentas.jpeg';
+import img05 from '@assets/05_acessorios.jpeg';
+import img06 from '@assets/06_brinquedos.jpeg';
+import img07 from '@assets/07_livros.jpeg';
 
 function Countdown() {
   const targetDate = new Date("2026-03-07T09:00:00").getTime();
@@ -44,11 +49,13 @@ function Countdown() {
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const storePhotos = [
-    facadeLeft,
-    facadeRight,
-    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1534452203293-497d1f97e0f0?q=80&w=800&auto=format&fit=crop"
+    img01,
+    img02,
+    img03,
+    img04,
+    img05,
+    img06,
+    img07
   ];
 
   useEffect(() => {
