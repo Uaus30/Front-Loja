@@ -124,8 +124,8 @@ export default function Home() {
             className="bg-gradient-to-r from-primary to-orange-600 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 border border-white/20"
           >
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-3xl md:text-5xl font-display font-bold">Inauguração neste Sábado!</h2>
-              <p className="text-white/90 text-lg">Venha comemorar conosco e aproveitar as melhores ofertas da região...</p>
+              <h2 className="text-3xl md:text-5xl font-display font-bold">A inauguração foi um sucesso!</h2>
+              <p className="text-white/90 text-lg">Venha conferir e aproveitar as melhores ofertas...</p>
               <Countdown />
             </div>
             
@@ -135,7 +135,7 @@ export default function Home() {
                   <CalendarDays className="w-8 h-8" />
                 </div>
                 <div className="text-left">
-                  <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Data</p>
+                  <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Inaugurada em</p>
                   <p className="text-xl font-bold">7 de Março de 2026</p>
                   <p className="text-white/90 text-sm font-medium">Sábado</p>
                 </div>
@@ -149,6 +149,7 @@ export default function Home() {
                   <p className="text-white/80 text-sm font-semibold uppercase tracking-wider">Local</p>
                   <p className="text-lg font-bold">Rua Paranaguá, 663</p>
                   <p className="text-white/90 text-sm font-medium">Centro, Tapira-PR</p>
+                  <p className="text-white/90 text-sm font-medium">Pertinho do Correios</p>
                 </div>
               </div>
             </div>
