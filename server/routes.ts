@@ -87,15 +87,24 @@ function parseCookies(req: Request) {
   }, {} as Record<string, string>);
 }
 
+function getCookieSettings() {
+  const isProduction = process.env.NODE_ENV === "production";
+  const sameSite = isProduction ? "None" : "Lax";
+  const secure = isProduction ? "; Secure" : "";
+  return { sameSite, secure };
+}
+
 function setAuthCookie(res: Response, token: string) {
+  const { sameSite, secure } = getCookieSettings();
   res.setHeader(
     "Set-Cookie",
-    `${TOKEN_COOKIE}=${token}; HttpOnly; Path=/; Max-Age=${TOKEN_TTL_SECONDS}; SameSite=Lax`,
+    `${TOKEN_COOKIE}=${token}; HttpOnly; Path=/; Max-Age=${TOKEN_TTL_SECONDS}; SameSite=${sameSite}${secure}`,
   );
 }
 
 function clearAuthCookie(res: Response) {
-  res.setHeader("Set-Cookie", `${TOKEN_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
+  const { sameSite, secure } = getCookieSettings();
+  res.setHeader("Set-Cookie", `${TOKEN_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=${sameSite}${secure}`);
 }
 
 async function requireAdminAuth(req: Request, res: Response, next: NextFunction) {
