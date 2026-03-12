@@ -130,12 +130,17 @@ export default function AdminPanel() {
 
   const visitsData = (stats?.mockMonthlyVisits ?? []).map((value, index) => ({ month: `M${index + 1}`, value }));
 
+  useEffect(() => {
+    if (!meQuery.isLoading && !meQuery.data) {
+      setLocation("/admin/login");
+    }
+  }, [meQuery.isLoading, meQuery.data, setLocation]);
+
   if (meQuery.isLoading) {
     return <div className="min-h-screen flex items-center justify-center">Carregando painel...</div>;
   }
 
   if (!meQuery.data) {
-    setLocation("/admin/login");
     return null;
   }
 
