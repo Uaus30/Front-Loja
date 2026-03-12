@@ -10,8 +10,10 @@ import { Layout } from "@/components/Layout";
 import Home from "@/pages/Home";
 import Products from "@/pages/Products";
 import Contact from "@/pages/Contact";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminPanel from "@/pages/AdminPanel";
 
-function Router() {
+function PublicRouter() {
   return (
     <Layout>
       <Switch>
@@ -21,6 +23,16 @@ function Router() {
         <Route component={NotFound} />
       </Switch>
     </Layout>
+  );
+}
+
+function Router() {
+  return (
+    <Switch>
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin" component={AdminPanel} />
+      <Route component={PublicRouter} />
+    </Switch>
   );
 }
 
