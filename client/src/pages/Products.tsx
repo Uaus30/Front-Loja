@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Tag, Loader2, ImageOff, ShoppingBag, X } from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
 import type { ProductResponse } from "@shared/routes";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 
 function normalizeSearchText(value: string) {
@@ -17,6 +17,7 @@ export default function Products() {
   const { data: products, isLoading, error } = useProducts();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const filteredProducts = useMemo(() => {
     if (!products) {
@@ -39,7 +40,14 @@ export default function Products() {
 
   useEffect(() => {
     document.title = "Uaus | Produtos";
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
+
+  useEffect(() => {
+    if (!isLoading && !error && products && products.length > 0) {
+      searchInputRef.current?.focus();
+    }
+  }, [error, isLoading, products]);
 
   return (
     <div className="min-h-screen bg-orange-50/30 pt-16 pb-24">
@@ -63,6 +71,7 @@ export default function Products() {
             <div className="relative max-w-xl mx-auto">
               <Search className="w-5 h-5 text-muted-foreground absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               <Input
+                ref={searchInputRef}
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 placeholder="Buscar produtos por nome ou descrição"
