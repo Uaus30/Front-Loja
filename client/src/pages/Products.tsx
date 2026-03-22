@@ -1,12 +1,41 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Tag, Loader2, ImageOff, ShoppingBag, X } from "lucide-react";
+import { Search, Tag, Loader2, ImageOff, ShoppingBag, X } from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
 import type { ProductResponse } from "@shared/routes";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Input } from "@/components/ui/input";
+
+function normalizeSearchText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
 
 export default function Products() {
   const { data: products, isLoading, error } = useProducts();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+
+  const filteredProducts = useMemo(() => {
+    if (!products) {
+      return [];
+    }
+
+    const normalizedSearch = normalizeSearchText(search);
+    if (!normalizedSearch) {
+      return products;
+    }
+
+    return products.filter((product: ProductResponse) => {
+      const searchableText = normalizeSearchText(
+        `${product.name} ${product.description ?? ""}`,
+      );
+
+      return searchableText.includes(normalizedSearch);
+    });
+  }, [products, search]);
 
   useEffect(() => {
     document.title = "Uaus | Produtos";
@@ -29,7 +58,20 @@ export default function Products() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+        {!isLoading && !error && products && products.length > 0 && (
+          <div className="mb-8">
+            <div className="relative max-w-xl mx-auto">
+              <Search className="w-5 h-5 text-muted-foreground absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Input
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Buscar produtos por nome ou descrição"
+                className="h-12 pl-12 pr-4 rounded-2xl border-orange-200 bg-white shadow-sm focus-visible:ring-primary"
+              />
+            </div>
+          </div>
+        )}
+
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
@@ -41,16 +83,28 @@ export default function Products() {
             <p className="text-muted-foreground">Tente recarregar a página ou voltar mais tarde.</p>
           </div>
         ) : products && products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product: ProductResponse, index: number) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                index={index} 
-                onImageClick={(url) => setSelectedImage(url)} 
-              />
-            ))}
-          </div>
+          filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {filteredProducts.map((product: ProductResponse, index: number) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={index}
+                  onImageClick={(url) => setSelectedImage(url)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-border">
+              <div className="w-20 h-20 bg-orange-50 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <Search className="w-10 h-10" />
+              </div>
+              <h3 className="text-2xl font-bold font-display mb-2">Nenhum produto encontrado</h3>
+              <p className="text-muted-foreground">
+                Tente buscar com outro nome, termo ou descrição.
+              </p>
+            </div>
+          )
         ) : (
           <div className="text-center py-32 bg-white rounded-3xl shadow-sm border border-border">
             <div className="w-20 h-20 bg-orange-50 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
