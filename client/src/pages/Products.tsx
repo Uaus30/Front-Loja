@@ -33,10 +33,10 @@ function ProductsMaintenanceNotice() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-display font-black text-white mb-6"
           >
-            Pagina em manutencao
+            Página em manutenção
           </motion.h1>
           <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
-            Estamos preparando melhorias e a unificacao com a API do backend.
+            Estamos preparando melhorias e a unificação com a API do backend.
           </p>
         </div>
       </div>
@@ -59,11 +59,11 @@ function ProductsMaintenanceNotice() {
           </h2>
 
           <p className="mx-auto mb-3 max-w-2xl text-base md:text-lg text-muted-foreground">
-            A pagina de produtos esta temporariamente indisponivel enquanto fazemos ajustes para melhorias internas.
+            A página de produtos está temporariamente indisponível enquanto fazemos ajustes para melhorias internas.
           </p>
 
           <p className="mx-auto max-w-2xl text-sm md:text-base font-medium text-primary">
-            Estamos trabalhando na unificacao dos sistemas com o backend para deixar tudo mais estavel e organizado.
+            Estamos trabalhando na unificação dos sistemas com o backend para deixar tudo mais estável e organizado.
           </p>
         </motion.div>
       </div>
