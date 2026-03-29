@@ -1,9 +1,19 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Tag, Loader2, ImageOff, ShoppingBag, X } from "lucide-react";
+import {
+  Search,
+  Tag,
+  Loader2,
+  ImageOff,
+  ShoppingBag,
+  X,
+  Wrench,
+} from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
 import type { ProductResponse } from "@shared/routes";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
+
+const PRODUCTS_MAINTENANCE_MODE = true;
 
 function normalizeSearchText(value: string) {
   return value
@@ -11,6 +21,54 @@ function normalizeSearchText(value: string) {
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim();
+}
+
+function ProductsMaintenanceNotice() {
+  return (
+    <div className="min-h-screen bg-orange-50/30 pt-16 pb-24">
+      <div className="bg-primary pt-20 pb-16 mb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-6xl font-display font-black text-white mb-6"
+          >
+            Pagina em manutencao
+          </motion.h1>
+          <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
+            Estamos preparando melhorias e a unificacao com a API do backend.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.35 }}
+          className="relative overflow-hidden rounded-3xl border border-orange-100 bg-white p-8 md:p-12 text-center shadow-xl shadow-orange-100/60"
+        >
+          <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary via-orange-400 to-amber-300" />
+
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-orange-100 text-primary shadow-sm">
+            <Wrench className="h-12 w-12" />
+          </div>
+
+          <h2 className="mb-4 text-3xl md:text-4xl font-display font-black text-foreground">
+            Voltamos em breve
+          </h2>
+
+          <p className="mx-auto mb-3 max-w-2xl text-base md:text-lg text-muted-foreground">
+            A pagina de produtos esta temporariamente indisponivel enquanto fazemos ajustes para melhorias internas.
+          </p>
+
+          <p className="mx-auto max-w-2xl text-sm md:text-base font-medium text-primary">
+            Estamos trabalhando na unificacao dos sistemas com o backend para deixar tudo mais estavel e organizado.
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  );
 }
 
 export default function Products() {
@@ -44,24 +102,36 @@ export default function Products() {
   }, []);
 
   useEffect(() => {
-    if (!isLoading && !error && products && products.length > 0) {
-      searchInputRef.current?.focus();
+    if (
+      PRODUCTS_MAINTENANCE_MODE ||
+      isLoading ||
+      error ||
+      !products ||
+      products.length === 0
+    ) {
+      return;
     }
+
+    searchInputRef.current?.focus();
   }, [error, isLoading, products]);
+
+  if (PRODUCTS_MAINTENANCE_MODE) {
+    return <ProductsMaintenanceNotice />;
+  }
 
   return (
     <div className="min-h-screen bg-orange-50/30 pt-16 pb-24">
       <div className="bg-primary pt-20 pb-16 mb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-display font-black text-white mb-6"
           >
-            Promoções e Novidades
+            Promocoes e Novidades
           </motion.h1>
           <p className="text-white/90 text-lg max-w-2xl mx-auto font-medium">
-            Todas as imagens são meramente ilustrativas.
+            Todas as imagens sao meramente ilustrativas.
           </p>
         </div>
       </div>
@@ -74,7 +144,7 @@ export default function Products() {
                 ref={searchInputRef}
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                placeholder="Buscar produtos por nome ou descrição"
+                placeholder="Buscar produtos por nome ou descricao"
                 className="h-12 pl-12 pr-4 rounded-2xl border-orange-200 bg-white shadow-sm focus-visible:ring-primary"
               />
             </div>
@@ -89,7 +159,7 @@ export default function Products() {
         ) : error ? (
           <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-red-100">
             <p className="text-red-500 font-bold mb-2">Ops! Ocorreu um erro ao carregar os produtos.</p>
-            <p className="text-muted-foreground">Tente recarregar a página ou voltar mais tarde.</p>
+            <p className="text-muted-foreground">Tente recarregar a pagina ou voltar mais tarde.</p>
           </div>
         ) : products && products.length > 0 ? (
           filteredProducts.length > 0 ? (
@@ -110,7 +180,7 @@ export default function Products() {
               </div>
               <h3 className="text-2xl font-bold font-display mb-2">Nenhum produto encontrado</h3>
               <p className="text-muted-foreground">
-                Tente buscar com outro nome, termo ou descrição.
+                Tente buscar com outro nome, termo ou descricao.
               </p>
             </div>
           )
@@ -124,7 +194,6 @@ export default function Products() {
           </div>
         )}
 
-        {/* Modal for Image Preview */}
         <AnimatePresence>
           {selectedImage && (
             <motion.div
@@ -141,12 +210,12 @@ export default function Products() {
                 className="relative max-w-4xl w-full aspect-square"
                 onClick={(e) => e.stopPropagation()}
               >
-                <img 
-                  src={selectedImage} 
-                  alt="Produto ampliado" 
+                <img
+                  src={selectedImage}
+                  alt="Produto ampliado"
                   className="w-full h-full object-contain rounded-2xl"
                 />
-                <button 
+                <button
                   onClick={() => setSelectedImage(null)}
                   className="absolute -top-12 right-0 text-white hover:text-primary transition-colors p-2"
                 >
@@ -161,15 +230,14 @@ export default function Products() {
   );
 }
 
-// Separate component for cleaner animation mapping
-function ProductCard({ 
-  product, 
-  index, 
-  onImageClick 
-}: { 
-  product: ProductResponse, 
-  index: number, 
-  onImageClick: (url: string) => void 
+function ProductCard({
+  product,
+  index,
+  onImageClick,
+}: {
+  product: ProductResponse;
+  index: number;
+  onImageClick: (url: string) => void;
 }) {
   return (
     <motion.div
@@ -178,23 +246,24 @@ function ProductCard({
       transition={{ delay: index * 0.05 }}
       className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-border group flex flex-col"
     >
-      <div 
+      <div
         className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center cursor-zoom-in"
         onClick={() => onImageClick(product.imageUrl)}
       >
         {product.imageUrl ? (
-          <img 
-            src={product.imageUrl} 
+          <img
+            src={product.imageUrl}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjY2JjYmNiIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiLz48Y2lyY2xlIGN4PSI4LjUiIGN5PSI4LjUiIHI9IjEuNSIvPjxwb2x5bGluZSBwb2ludHM9IjIxIDE1IDE2IDEwIDUgMjEiLz48L3N2Zz4=';
+              (e.target as HTMLImageElement).src =
+                "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjY2JjYmNiIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiLz48Y2lyY2xlIGN4PSI4LjUiIGN5PSI4LjUiIHI9IjEuNSIvPjxwb2x5bGluZSBwb2ludHM9IjIxIDE1IDE2IDEwIDUgMjEiLz48L3N2Zz4=";
             }}
           />
         ) : (
           <ImageOff className="w-12 h-12 text-gray-300" />
         )}
-        
+
         {product.isPromotion && (
           <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-lg">
             <Tag className="w-3 h-3" />
@@ -205,13 +274,17 @@ function ProductCard({
 
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="font-bold text-base text-foreground mb-1 line-clamp-1">{product.name}</h3>
-        <p className="text-xs text-muted-foreground mb-4 line-clamp-2 flex-grow">{product.description}</p>
-        
+        <p className="text-xs text-muted-foreground mb-4 line-clamp-2 flex-grow">
+          {product.description}
+        </p>
+
         <div className="flex items-end justify-between mt-auto pt-3 border-t border-gray-100">
           <div className="flex flex-col">
-            <span className="text-[10px] text-muted-foreground uppercase font-semibold">Por apenas</span>
+            <span className="text-[10px] text-muted-foreground uppercase font-semibold">
+              Por apenas
+            </span>
             <span className="text-xl font-display font-black text-primary">
-              R$ {Number(product.price).toFixed(2).replace('.', ',')}
+              R$ {Number(product.price).toFixed(2).replace(".", ",")}
             </span>
           </div>
         </div>
